@@ -1,0 +1,370 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "smart cart",
+            "modelConfiguration": {
+                "fallbackIntentSensitivity": {
+                    "level": "LOW"
+                }
+            },
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "openingTime",
+                    "slots": [],
+                    "samples": [
+                        "what time bjs wholesale Club open",
+                        "what time whole foods market open",
+                        "what time star market open",
+                        "what time the grocery open"
+                    ]
+                },
+                {
+                    "name": "closingTime",
+                    "slots": [],
+                    "samples": [
+                        "what time bjs wholesale Club close",
+                        "what time whole foods market close ",
+                        "what time star market close",
+                        "what time the grocery close"
+                    ]
+                },
+                {
+                    "name": "priceOfFruit",
+                    "slots": [
+                        {
+                            "name": "avocado",
+                            "type": "AVOCADOS"
+                        },
+                        {
+                            "name": "apple",
+                            "type": "APPLES"
+                        },
+                        {
+                            "name": "Grapefruit",
+                            "type": "GRAPEFRUIT"
+                        },
+                        {
+                            "name": "Pineapple",
+                            "type": "PINEAPPLE"
+                        },
+                        {
+                            "name": "Lemon",
+                            "type": "LEMON"
+                        }
+                    ],
+                    "samples": [
+                        "how much is price of {Lemon}",
+                        "what is the price of {Pineapple}",
+                        "what is the price of {Grapefruit}",
+                        "what is the price of {apple}",
+                        "How much is  {apple}",
+                        "How much is  {avocado}",
+                        "what is the price of {avocado}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "AVOCADOS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Hass"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Zutano"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Fuerte"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Choquette"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Bacon"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Maluma"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Gwen"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Pinkerton"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Reed"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Lula"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "APPLES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Empire"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Gala"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Fuji"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Granny Smith"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Cortland"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Macoun"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Braeburn"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Cameo"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Red Rome"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Red Delicious"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Paula Red"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "GRAPEFRUIT",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Cotton Candy"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Moon Drop"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Ruby seedless"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Concord"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Flame seedless"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Thompson seedless"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PINEAPPLE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Abacaxi Pineapples"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Queen Pineapples"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Red Spanish Pineapple"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Smooth Cayenne Pineapples"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Pernambuco Pineapples"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Mordilona Pineapples"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Kona Sugarloaf"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Brecheche"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "LEMON",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Avalon Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Bearss Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Buddha’s Hand Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Bush Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Citron Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Dorshapo Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Eureka Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Fino Citron Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Greek Citron Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Lisbon Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Meyer Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Organic Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Ponderosa Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Sweet Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "True Lemons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Verna Lemons"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
