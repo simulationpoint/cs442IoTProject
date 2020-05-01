@@ -1,4 +1,5 @@
 // Lambda Function code for Alexa.
+// best sample template
 
 const Alexa = require("ask-sdk-core");
 const Aws = require("aws-sdk");
@@ -13,9 +14,6 @@ var table = "shoppingCart";
 var params;
 var x = [];
 var y=[];
-
-
-
 
 
 const invocationName = "smart cart";
