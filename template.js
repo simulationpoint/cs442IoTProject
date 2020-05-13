@@ -1,20 +1,15 @@
 // Lambda Function code for Alexa.
-// Best saample template 
 
-
-
-
-
-const Alexa = require("ask-sdk-core");
+const Alexa = require("ask-sdk");
 const Aws = require("aws-sdk");
-const i18n = require('i18next');
+const http = require("https");
 
 Aws.config.update({
-  region: "us-east-2"
+  region: "us-east-1"
 });
 var docClient = new Aws.DynamoDB.DocumentClient();
 
-var table = "shoppingCart";
+var table = "smartCart";
 var params;
 var x = [];
 var y=[];
@@ -30,8 +25,7 @@ const invocationName = "smart cart";
 //   The history[] array will track previous request(s), used for contextual Help/Yes/No handling.
 //   Set up DynamoDB persistence to have the skill save and reload these attributes between skill sessions.
 
-function getMemoryAttributes() {   
-    const memoryAttributes = {
+function getMemoryAttributes() {   const memoryAttributes = {
        "history":[],
 
 
@@ -233,7 +227,9 @@ const addIntent_Handler =  {
         }
     }
 
-// DybamoDB function call
+//================Dybamo db
+
+
 
 docClient.put(params, function(err, data) {
     if (err) {
@@ -348,7 +344,7 @@ const delIntent_Handler =  {
         say += slotStatus;
 
 
-//Dynamo db---
+//---------------------------------------Dynamo db---
 params = {
     TableName:table,
     Key:{
@@ -527,9 +523,10 @@ const ErrorHandler =  {
     }
 };
 
+
 // 2. Constants ===========================================================================
 
-    //    Here you can define static data, to be used elsewhere in your code.  For example: 
+    // Here you can define static data, to be used elsewhere in your code.  For example: 
     //    const myString = "Hello World";
     //    const myArray  = [ "orange", "grape", "strawberry" ];
     //    const myObject = { "city": "Boston",  "state":"Massachusetts" };
@@ -918,7 +915,7 @@ function shuffleArray(array) {  // Fisher Yates shuffle!
  
     return array; 
 } 
-// 4. Exports handler function and setup =======================
+// 4. Exports handler function and setup ===================================================
 const skillBuilder = Alexa.SkillBuilders.standard();
 exports.handler = skillBuilder
     .addRequestHandlers(
@@ -938,218 +935,416 @@ exports.handler = skillBuilder
     .addRequestInterceptors(InitMemoryAttributesInterceptor)
     .addRequestInterceptors(RequestHistoryInterceptor)
 
-    .addResponseInterceptors(ResponseRecordSpeechOutputInterceptor)
+   // .addResponseInterceptors(ResponseRecordSpeechOutputInterceptor)
 
- .addRequestInterceptors(RequestPersistenceInterceptor)
- .addResponseInterceptors(ResponsePersistenceInterceptor)
+ // .addRequestInterceptors(RequestPersistenceInterceptor)
+ // .addResponseInterceptors(ResponsePersistenceInterceptor)
 
- .withTableName("askMemorySkillTable")
-  .withAutoCreateTable(true)
+ // .withTableName("askMemorySkillTable")
+ // .withAutoCreateTable(true)
 
     .lambda();
 
-// Front end just for reference 
 
-const model = {
-  "interactionModel": {
-    "languageModel": {
-      "invocationName": "smart cart",
-      "intents": [
-        {
-          "name": "AMAZON.FallbackIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": []
-        },
-        {
-          "name": "addIntent",
-          "slots": [
-            {
-              "name": "qt",
-              "type": "quantity"
-            },
-            {
-              "name": "mes",
-              "type": "mesurment"
-            },
-            {
-              "name": "itemname",
-              "type": "itemNameSlot"
-            }
-          ],
-          "samples": [
-            "add {qt} {mes} {itemname} ",
-            "add {qt} {mes} {itemname} to cart",
-            "add {qt} {mes} {itemname} to my cart"
-          ]
-        },
-        {
-          "name": "delIntent",
-          "slots": [
-            {
-              "name": "qt",
-              "type": "quantity"
-            },
-            {
-              "name": "mes",
-              "type": "mesurment"
-            },
-            {
-              "name": "itemname",
-              "type": "itemNameSlot"
-            }
-          ],
-          "samples": [
-            "delete {qt} {mes} {itemname} to cart",
-            "delete {qt} {mes} {itemname} to my cart",
-            "delete {qt} {mes} {itemname} "
-          ]
-        },
-        {
-          "name": "listIntent",
-          "slots": [],
-          "samples": [
-            "say all items",
-            "say all item",
-            "list all items",
-            "list all item"
-          ]
-        },
-        {
-          "name": "checkIntent",
-          "slots": [],
-          "samples": [
-            "do checkout",
-            "buy all",
-            "check items"
-          ]
-        },
-        {
-          "name": "nameIntent",
-          "slots": [
-            {
-              "name": "name",
-              "type": "nameSlot"
-            }
-          ],
-          "samples": [
-            "{name}",
-            "myself {name}",
-            "I am {name}",
-            "my name is {name}"
-          ]
-        },
-        {
-          "name": "LaunchRequest"
+// End of Skill code -------------------------------------------------------------
+// Static Language Model for reference
+
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "smart cart",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "addIntent",
+                    "slots": [
+                        {
+                            "name": "qt",
+                            "type": "quantity"
+                        },
+                        {
+                            "name": "mes",
+                            "type": "mesurment"
+                        },
+                        {
+                            "name": "itemname",
+                            "type": "itemNameSlot"
+                        }
+                    ],
+                    "samples": [
+                        "put {qt} {mes} {itemname}",
+                        "put {qt} {mes} {itemname} to my cart",
+                        "add {qt} {mes} {itemname} ",
+                        "add {qt} {mes} {itemname} to cart",
+                        "add {qt} {mes} {itemname} to my cart"
+                    ]
+                },
+                {
+                    "name": "delIntent",
+                    "slots": [
+                        {
+                            "name": "qt",
+                            "type": "quantity"
+                        },
+                        {
+                            "name": "mes",
+                            "type": "mesurment"
+                        },
+                        {
+                            "name": "itemname",
+                            "type": "itemNameSlot"
+                        }
+                    ],
+                    "samples": [
+                        "remove {qt} {mes} {itemname}",
+                        "remove {qt} {mes} {itemname} from my cart",
+                        "remove {itemname}",
+                        "delete {itemname}",
+                        "delete {qt} {mes} {itemname} to cart",
+                        "delete {qt} {mes} {itemname} to my cart",
+                        "delete {qt} {mes} {itemname} "
+                    ]
+                },
+                {
+                    "name": "listIntent",
+                    "slots": [],
+                    "samples": [
+                        "list all",
+                        "say all items",
+                        "say all item",
+                        "list all items",
+                        "list all item"
+                    ]
+                },
+                {
+                    "name": "checkIntent",
+                    "slots": [],
+                    "samples": [
+                        "checkout",
+                        "do checkout",
+                        "buy all",
+                        "check items"
+                    ]
+                },
+                {
+                    "name": "nameIntent",
+                    "slots": [
+                        {
+                            "name": "name",
+                            "type": "nameSlot"
+                        }
+                    ],
+                    "samples": [
+                        "{name} is my name",
+                        "{name}",
+                        "myself {name}",
+                        "I am {name}",
+                        "my name is {name}"
+                    ]
+                },
+                {
+                    "name": "clearIntent",
+                    "slots": [],
+                    "samples": [
+                        "talk less",
+                        "clear my data",
+                        "clear my checklist",
+                        "clear all"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "quantity",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "twenty"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ten"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "six"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "five"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "four"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "one"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "twenty two"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "thirteen"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "fourty four"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "three"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "two"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "mesurment",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "packets"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pieces"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "grams"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pound"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "litre"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kg"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "itemNameSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "chocolates"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "flour"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "wheat"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ghee"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mustard"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "grain"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "brush"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "soap"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "butter"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "egg"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rice"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bread"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "nameSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "srinivas"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sohan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ramesh"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rohan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "prakash"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "shivam"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "abhay"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sravan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sagar"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "spoorthi"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sanjeet"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "naveen"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sahana"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "chandan kumar mishra"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "chandan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "chandan mishra"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "checktSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "submit"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "checkout"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "terminate"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "end"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "quit"
+                            }
+                        }
+                    ]
+                }
+            ]
         }
-      ],
-      "types": [
-        {
-          "name": "quantity",
-          "values": [
-            {
-              "name": {
-                "value": "twenty two"
-              }
-            },
-            {
-              "name": {
-                "value": "thirteen"
-              }
-            },
-            {
-              "name": {
-                "value": "fourty four"
-              }
-            },
-            {
-              "name": {
-                "value": "three"
-              }
-            },
-            {
-              "name": {
-                "value": "two"
-              }
-            }
-          ]
-        },
-        {
-          "name": "mesurment",
-          "values": [
-            {
-              "name": {
-                "value": "grams"
-              }
-            },
-            {
-              "name": {
-                "value": "pound"
-              }
-            },
-            {
-              "name": {
-                "value": "litre"
-              }
-            },
-            {
-              "name": {
-                "value": "kg"
-              }
-            }
-          ]
-        },
-        {
-          "name": "itemNameSlot",
-          "values": [
-            {
-              "name": {
-                "value": "egg"
-              }
-            },
-            {
-              "name": {
-                "value": "rice"
-              }
-            },
-            {
-              "name": {
-                "value": "bread"
-              }
-            }
-          ]
-        },
-        {
-          "name": "nameSlot",
-          "values": [
-            {
-              "name": {
-                "value": "chandan kumar mishra"
-              }
-            },
-            {
-              "name": {
-                "value": "chandan"
-              }
-            },
-            {
-              "name": {
-                "value": "chandan mishra"
-              }
-            }
-          ]
-        }
-      ]
     }
-  }
-};
+}
